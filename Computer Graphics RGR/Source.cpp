@@ -1,18 +1,18 @@
-#include <stdio.h>
-#include <stdarg.h>
-#include <math.h>
 #include <GL\glut.h>
+#include <math.h>
+#include <stdarg.h>
+#include <stdio.h>
 
 #define part1
 #ifdef part1
 //===================================================================
-//  Расчетно-графическая работа по компьютерной графике
-//  
-//  Группа АБ-021 Шуваев В.А.
+//  Р Р°СЃС‡РµС‚РЅРѕ-РіСЂР°С„РёС‡РµСЃРєР°СЏ СЂР°Р±РѕС‚Р° РїРѕ РєРѕРјРїСЊСЋС‚РµСЂРЅРѕР№ РіСЂР°С„РёРєРµ
+//
+//  Р“СЂСѓРїРїР° РђР‘-021 РЁСѓРІР°РµРІ Р’.Рђ.
 //===================================================================
 
 // ----------------------------------------------------------
-// Объявление функций
+// РћР±СЉСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёР№
 // ----------------------------------------------------------
 void display_octahedron();
 void display_trapezoid();
@@ -22,7 +22,7 @@ void keyboard_ascii(unsigned char key, int x, int y);
 void mouse(int button, int state, int x, int y);
 
 // ----------------------------------------------------------
-// Глобальные переменные
+// Р“Р»РѕР±Р°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ
 // ----------------------------------------------------------
 double rotate_y = 0;
 double rotate_x = 0;
@@ -34,379 +34,363 @@ double bg = 0;
 int figure = 0;
 
 // ----------------------------------------------------------
-// Цвета фона
+// Р¦РІРµС‚Р° С„РѕРЅР°
 // ----------------------------------------------------------
-#define BG_BLACK      glClearColor(0, 0, 0, 1)
-#define BG_GREEN      glClearColor(0, 0, 1, 1)
-#define BG_BLUE       glClearColor(0, 1, 0, 1)
+#define BG_BLACK glClearColor(0, 0, 0, 1)
+#define BG_GREEN glClearColor(0, 0, 1, 1)
+#define BG_BLUE glClearColor(0, 1, 0, 1)
 #define BG_LIGTH_BLUE glClearColor(0, 1, 1, 1)
-#define BG_RED        glClearColor(1, 0 ,0, 1)
-#define BG_PURPLE     glClearColor(1, 0, 1, 1)
-#define BG_YELLOW     glClearColor(1, 1, 0, 1)
-#define BG_WHITE      glClearColor(1, 1, 1, 1)
-#define BG_DEFAULT    glClearColor(0.13, 0, 0.38, 1)
+#define BG_RED glClearColor(1, 0, 0, 1)
+#define BG_PURPLE glClearColor(1, 0, 1, 1)
+#define BG_YELLOW glClearColor(1, 1, 0, 1)
+#define BG_WHITE glClearColor(1, 1, 1, 1)
+#define BG_DEFAULT glClearColor(0.13, 0, 0.38, 1)
 
 // ----------------------------------------------------------
-// Показ октаэдра
+// РџРѕРєР°Р· РѕРєС‚Р°СЌРґСЂР°
 // ----------------------------------------------------------
 void display_octahedron() {
+  //  РџРµСЂРµРґ РІРµСЂС…
+  glBegin(GL_POLYGON);
+  glColor3f(0.25 + r, 0.25 + g, 0.25 + b);
+  glVertex3f(0.25 * k, 0 * k, -0.25 * k);
+  glVertex3f(0 * k, 0.5 * k, 0 * k);
+  glVertex3f(-0.25 * k, 0 * k, -0.25 * k);
+  glEnd();
 
-    //  Перед верх
-    glBegin(GL_POLYGON);
-    glColor3f(0.25 + r, 0.25 + g, 0.25 + b);
-    glVertex3f(0.25 * k, 0 * k, -0.25 * k);
-    glVertex3f(0 * k, 0.5 * k, 0 * k);
-    glVertex3f(-0.25 * k, 0 * k, -0.25 * k);
-    glEnd();
+  //  Р—Р°РґРЅСЏСЏ С‡Р°СЃС‚СЊ РІРµСЂС…
+  glBegin(GL_POLYGON);
+  glColor3f(1.0 + r, 0.5 + g, 0 + b);
+  glVertex3f(0.25 * k, 0 * k, 0.25 * k);
+  glVertex3f(0 * k, 0.5 * k, 0 * k);
+  glVertex3f(-0.25 * k, 0 * k, 0.25 * k);
+  glEnd();
 
-    //  Задняя часть верх
-    glBegin(GL_POLYGON);
-    glColor3f(1.0 + r, 0.5 + g, 0 + b);
-    glVertex3f(0.25 * k, 0 * k, 0.25 * k);
-    glVertex3f(0 * k, 0.5 * k, 0 * k);
-    glVertex3f(-0.25 * k, 0 * k, 0.25 * k);
-    glEnd();
+  //  РџСЂР°РІР°СЏ СЃС‚РѕСЂРѕРЅР° РІРµСЂС…
+  glBegin(GL_POLYGON);
+  glColor3f(1.0 + r, 0.0 + g, 1.0 + b);
+  glVertex3f(0.25 * k, 0 * k, -0.25 * k);
+  glVertex3f(0 * k, 0.5 * k, 0 * k);
+  glVertex3f(0.25 * k, 0 * k, 0.25 * k);
+  glEnd();
 
-    //  Правая сторона верх
-    glBegin(GL_POLYGON);
-    glColor3f(1.0 + r, 0.0 + g, 1.0 + b);
-    glVertex3f(0.25 * k, 0 * k, -0.25 * k);
-    glVertex3f(0 * k, 0.5 * k, 0 * k);
-    glVertex3f(0.25 * k, 0 * k, 0.25 * k);
-    glEnd();
+  //  Р›РµРІР°СЏ СЃС‚РѕСЂРѕРЅР° РІРµСЂС…
+  glBegin(GL_POLYGON);
+  glColor3f(0.0 + r, 0.65 + g, 1 + b);
+  glVertex3f(-0.25 * k, 0 * k, 0.25 * k);
+  glVertex3f(0 * k, 0.5 * k, 0 * k);
+  glVertex3f(-0.25 * k, 0 * k, -0.25 * k);
+  glEnd();
 
-    //  Левая сторона верх
-    glBegin(GL_POLYGON);
-    glColor3f(0.0 + r, 0.65 + g, 1 + b);
-    glVertex3f(-0.25 * k, 0 * k, 0.25 * k);
-    glVertex3f(0 * k, 0.5 * k, 0 * k);
-    glVertex3f(-0.25 * k, 0 * k, -0.25 * k);
-    glEnd();
+  //  РџРµСЂРµРґ РЅРёР·
+  glBegin(GL_POLYGON);
+  glColor3f(0.65 + r, 1 + g, 0 + b);
+  glVertex3f(0.25 * k, 0 * k, -0.25 * k);
+  glVertex3f(0 * k, -0.5 * k, 0 * k);
+  glVertex3f(-0.25 * k, 0 * k, -0.25 * k);
+  glEnd();
 
-    //  Перед низ
-    glBegin(GL_POLYGON);
-    glColor3f(0.65 + r, 1 + g, 0 + b);
-    glVertex3f(0.25 * k, 0 * k, -0.25 * k);
-    glVertex3f(0 * k, -0.5 * k, 0 * k);
-    glVertex3f(-0.25 * k, 0 * k, -0.25 * k);
-    glEnd();
+  //  Р—Р°РґРЅСЏСЏ С‡Р°СЃС‚СЊ РЅРёР·
+  glBegin(GL_POLYGON);
+  glColor3f(0.55 + r, 0 + g, 1.0 + b);
+  glVertex3f(0.25 * k, 0 * k, 0.25 * k);
+  glVertex3f(0 * k, -0.5 * k, 0 * k);
+  glVertex3f(-0.25 * k, 0 * k, 0.25 * k);
+  glEnd();
 
-    //  Задняя часть низ
-    glBegin(GL_POLYGON);
-    glColor3f(0.55 + r, 0 + g, 1.0 + b);
-    glVertex3f(0.25 * k, 0 * k, 0.25 * k);
-    glVertex3f(0 * k, -0.5 * k, 0 * k);
-    glVertex3f(-0.25 * k, 0 * k, 0.25 * k);
-    glEnd();
+  //  РџСЂР°РІР°СЏ СЃС‚РѕСЂРѕРЅР° РЅРёР·
+  glBegin(GL_POLYGON);
+  glColor3f(1.0 + r, 0.0 + g, 0.68 + b);
+  glVertex3f(0.25 * k, 0 * k, -0.25 * k);
+  glVertex3f(0 * k, -0.5 * k, 0 * k);
+  glVertex3f(0.25 * k, 0 * k, 0.25 * k);
+  glEnd();
 
-    //  Правая сторона низ
-    glBegin(GL_POLYGON);
-    glColor3f(1.0 + r, 0.0 + g, 0.68 + b);
-    glVertex3f(0.25 * k, 0 * k, -0.25 * k);
-    glVertex3f(0 * k, -0.5 * k, 0 * k);
-    glVertex3f(0.25 * k, 0 * k, 0.25 * k);
-    glEnd();
-
-    //  Левая сторона низ
-    glBegin(GL_POLYGON);
-    glColor3f(0.0 + r, 1.0 + g, 0.82 + b);
-    glVertex3f(-0.25 * k, 0 * k, 0.25 * k);
-    glVertex3f(0 * k, -0.5 * k, 0 * k);
-    glVertex3f(-0.25 * k, 0 * k, -0.25 * k);
-    glEnd();
-
+  //  Р›РµРІР°СЏ СЃС‚РѕСЂРѕРЅР° РЅРёР·
+  glBegin(GL_POLYGON);
+  glColor3f(0.0 + r, 1.0 + g, 0.82 + b);
+  glVertex3f(-0.25 * k, 0 * k, 0.25 * k);
+  glVertex3f(0 * k, -0.5 * k, 0 * k);
+  glVertex3f(-0.25 * k, 0 * k, -0.25 * k);
+  glEnd();
 }
 
 // ----------------------------------------------------------
-// Показ трапеции
+// РџРѕРєР°Р· С‚СЂР°РїРµС†РёРё
 // ----------------------------------------------------------
 void display_trapezoid() {
+  //  Р’РµСЂС…РЅСЏСЏ РіСЂР°РЅСЊ
+  glBegin(GL_POLYGON);
+  glColor3f(0.25 + r, 0.25 + g, 0.25 + b);
 
-    //  Верхняя грань
-    glBegin(GL_POLYGON);
-    glColor3f(0.25+r, 0.25+g, 0.25+b);
+  glVertex3f(0.2 * k, 0.2 * k, 0.2 * k);
+  glVertex3f(0.2 * k, 0.2 * k, -0.2 * k);
+  glVertex3f(-0.2 * k, 0.2 * k, -0.2 * k);
+  glVertex3f(-0.2 * k, 0.2 * k, 0.2 * k);
 
-    glVertex3f(0.2 * k, 0.2 * k, 0.2 * k);
-    glVertex3f(0.2 * k, 0.2 * k, -0.2 * k);
-    glVertex3f(-0.2 * k, 0.2 * k, -0.2 * k);
-    glVertex3f(-0.2 * k, 0.2 * k, 0.2 * k);
-    
-    glEnd();
+  glEnd();
 
-    //  Фронтальная грань
-    glBegin(GL_POLYGON);
-    glColor3f(1.0 + r, 0.5 + g, 0 + b);
+  //  Р¤СЂРѕРЅС‚Р°Р»СЊРЅР°СЏ РіСЂР°РЅСЊ
+  glBegin(GL_POLYGON);
+  glColor3f(1.0 + r, 0.5 + g, 0 + b);
 
-    glVertex3f(-0.4 * k, -0.2 * k, -0.2 * k);
-    glVertex3f(0.4 * k, -0.2 * k, -0.2 * k);
-    glVertex3f(0.2 * k, 0.2 * k, -0.2 * k);
-    glVertex3f(-0.2 * k, 0.2 * k, -0.2 * k);
+  glVertex3f(-0.4 * k, -0.2 * k, -0.2 * k);
+  glVertex3f(0.4 * k, -0.2 * k, -0.2 * k);
+  glVertex3f(0.2 * k, 0.2 * k, -0.2 * k);
+  glVertex3f(-0.2 * k, 0.2 * k, -0.2 * k);
 
-    
-    glEnd();
+  glEnd();
 
-    //  боковая грань право
-    glBegin(GL_POLYGON);
-    glColor3f(1.0 + r, 0.0 + g, 1.0 + b);
+  //  Р±РѕРєРѕРІР°СЏ РіСЂР°РЅСЊ РїСЂР°РІРѕ
+  glBegin(GL_POLYGON);
+  glColor3f(1.0 + r, 0.0 + g, 1.0 + b);
 
-    glVertex3f(0.2 * k, 0.2 * k, 0.2 * k);
-    glVertex3f(0.2 * k, 0.2 * k, -0.2 * k);
-    glVertex3f(0.4 * k, -0.2 * k, -0.2 * k);
-    glVertex3f(0.4 * k, -0.2 * k, 0.2 * k);
-    
-    glEnd();
+  glVertex3f(0.2 * k, 0.2 * k, 0.2 * k);
+  glVertex3f(0.2 * k, 0.2 * k, -0.2 * k);
+  glVertex3f(0.4 * k, -0.2 * k, -0.2 * k);
+  glVertex3f(0.4 * k, -0.2 * k, 0.2 * k);
 
-    //  боковая грань лево
-    glBegin(GL_POLYGON);
-    glColor3f(0.0 + r, 0.65 + g, 1 + b);
+  glEnd();
 
-    glVertex3f(-0.4 * k, -0.2 * k, 0.2 * k);
-    glVertex3f(-0.4 * k, -0.2 * k, -0.2 * k);
-    glVertex3f(-0.2 * k, 0.2 * k, -0.2 * k);
-    glVertex3f(-0.2 * k, 0.2 * k, 0.2 * k);
+  //  Р±РѕРєРѕРІР°СЏ РіСЂР°РЅСЊ Р»РµРІРѕ
+  glBegin(GL_POLYGON);
+  glColor3f(0.0 + r, 0.65 + g, 1 + b);
 
-    glEnd();
+  glVertex3f(-0.4 * k, -0.2 * k, 0.2 * k);
+  glVertex3f(-0.4 * k, -0.2 * k, -0.2 * k);
+  glVertex3f(-0.2 * k, 0.2 * k, -0.2 * k);
+  glVertex3f(-0.2 * k, 0.2 * k, 0.2 * k);
 
-    //  задняя грань
-    glBegin(GL_POLYGON);
-    glColor3f(0.65 + r, 1 + g, 0 + b);
+  glEnd();
 
-    glVertex3f(-0.4 * k, -0.2 * k, 0.2 * k);
-    glVertex3f(0.4 * k, -0.2 * k, 0.2 * k);
-    glVertex3f(0.2 * k, 0.2 * k, 0.2 * k);
-    glVertex3f(-0.2 * k, 0.2 * k, 0.2 * k);
-    
-    glEnd();
+  //  Р·Р°РґРЅСЏСЏ РіСЂР°РЅСЊ
+  glBegin(GL_POLYGON);
+  glColor3f(0.65 + r, 1 + g, 0 + b);
 
-    //  Нижняя грань
-    glBegin(GL_POLYGON);
-    glColor3f(0.0 + r, 1.0 + g, 0.82 + b);
+  glVertex3f(-0.4 * k, -0.2 * k, 0.2 * k);
+  glVertex3f(0.4 * k, -0.2 * k, 0.2 * k);
+  glVertex3f(0.2 * k, 0.2 * k, 0.2 * k);
+  glVertex3f(-0.2 * k, 0.2 * k, 0.2 * k);
 
-    glVertex3f(0.4 * k, -0.2 * k, 0.2 * k);
-    glVertex3f(0.4 * k, -0.2 * k, -0.2 * k);
-    glVertex3f(-0.4 * k, -0.2 * k, -0.2 * k);
-    glVertex3f(-0.4 * k, -0.2 * k, 0.2 * k);
+  glEnd();
 
-    glEnd();
+  //  РќРёР¶РЅСЏСЏ РіСЂР°РЅСЊ
+  glBegin(GL_POLYGON);
+  glColor3f(0.0 + r, 1.0 + g, 0.82 + b);
 
+  glVertex3f(0.4 * k, -0.2 * k, 0.2 * k);
+  glVertex3f(0.4 * k, -0.2 * k, -0.2 * k);
+  glVertex3f(-0.4 * k, -0.2 * k, -0.2 * k);
+  glVertex3f(-0.4 * k, -0.2 * k, 0.2 * k);
+
+  glEnd();
 }
 
 // ----------------------------------------------------------
-// Вызов одной из фигур на экран
+// Р’С‹Р·РѕРІ РѕРґРЅРѕР№ РёР· С„РёРіСѓСЂ РЅР° СЌРєСЂР°РЅ
 // ----------------------------------------------------------
 
 void display() {
-    int _bg = round(bg);
-    //  Задание цвета фона
-    switch (_bg % 9) {
+  int _bg = round(bg);
+  //  Р—Р°РґР°РЅРёРµ С†РІРµС‚Р° С„РѕРЅР°
+  switch (_bg % 9) {
     case 0:
-        BG_DEFAULT;
-        break;
+      BG_DEFAULT;
+      break;
     case 1:
-        BG_BLACK;
-        break;
+      BG_BLACK;
+      break;
     case 2:
-        BG_GREEN;
-        break;
+      BG_GREEN;
+      break;
     case 3:
-        BG_BLUE;
-        break;
+      BG_BLUE;
+      break;
     case 4:
-        BG_LIGTH_BLUE;
-        break;
+      BG_LIGTH_BLUE;
+      break;
     case 5:
-        BG_RED;
-        break;
+      BG_RED;
+      break;
     case 6:
-        BG_PURPLE;
-        break;
+      BG_PURPLE;
+      break;
     case 7:
-        BG_YELLOW;
-        break;
+      BG_YELLOW;
+      break;
     case 8:
-        BG_WHITE;
-        break;
+      BG_WHITE;
+      break;
+  }
 
-    }
+  //  РћС‡РёСЃС‚РєР° СЌРєСЂР°РЅР° Рё Р±СѓС„РµСЂР°
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //  Очистка экрана и буфера
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  //  РћС‡РёСЃС‚РєР° РјР°С‚СЂРёС†С‹
+  glLoadIdentity();
 
-    //  Очистка матрицы
-    glLoadIdentity();
+  //  РР·РјРµРЅРµРЅРёРµ РїРѕР»РѕР¶РµРЅРёСЏ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ
+  glRotatef(rotate_x, 1.0, 0.0, 0.0);
+  glRotatef(rotate_y, 0.0, 1.0, 0.0);
 
-    //  Изменение положения в пространстве 
-    glRotatef(rotate_x, 1.0, 0.0, 0.0);
-    glRotatef(rotate_y, 0.0, 1.0, 0.0);
-
-    // Выборка фигуры
-    switch (figure%2) {
+  // Р’С‹Р±РѕСЂРєР° С„РёРіСѓСЂС‹
+  switch (figure % 2) {
     case 0:
-        display_octahedron();
-        break;
+      display_octahedron();
+      break;
     case 1:
-        display_trapezoid();
-        break;
-    }
+      display_trapezoid();
+      break;
+  }
 
-
-    //  Очистка буферов
-    glFlush();
-    glutSwapBuffers();
+  //  РћС‡РёСЃС‚РєР° Р±СѓС„РµСЂРѕРІ
+  glFlush();
+  glutSwapBuffers();
 }
 
 // ----------------------------------------------------------
-//  Вызов функции для работы со служебными клавишами
+//  Р’С‹Р·РѕРІ С„СѓРЅРєС†РёРё РґР»СЏ СЂР°Р±РѕС‚С‹ СЃРѕ СЃР»СѓР¶РµР±РЅС‹РјРё РєР»Р°РІРёС€Р°РјРё
 // ----------------------------------------------------------
 void specialKeys(int key, int x, int y) {
-
-    switch (key) {
-        //  Клавиша "Right" - повернуть на 2 градуса вправо
+  switch (key) {
+      //  РљР»Р°РІРёС€Р° "Right" - РїРѕРІРµСЂРЅСѓС‚СЊ РЅР° 2 РіСЂР°РґСѓСЃР° РІРїСЂР°РІРѕ
     case GLUT_KEY_RIGHT:
-        rotate_y += 2;
-        break;
-        //  Клавиша "Left" - повернуть на 2 градуса влево
+      rotate_y += 2;
+      break;
+      //  РљР»Р°РІРёС€Р° "Left" - РїРѕРІРµСЂРЅСѓС‚СЊ РЅР° 2 РіСЂР°РґСѓСЃР° РІР»РµРІРѕ
     case GLUT_KEY_LEFT:
-        rotate_y -= 2;
-        break;
-        //  Клавиша "Up" - повернуть на 2 градуса вверх
+      rotate_y -= 2;
+      break;
+      //  РљР»Р°РІРёС€Р° "Up" - РїРѕРІРµСЂРЅСѓС‚СЊ РЅР° 2 РіСЂР°РґСѓСЃР° РІРІРµСЂС…
     case GLUT_KEY_UP:
-        rotate_x += 2;
-        break;
-        //  Клавиша "Down" - повернуть на 2 градуса вниз
+      rotate_x += 2;
+      break;
+      //  РљР»Р°РІРёС€Р° "Down" - РїРѕРІРµСЂРЅСѓС‚СЊ РЅР° 2 РіСЂР°РґСѓСЃР° РІРЅРёР·
     case GLUT_KEY_DOWN:
-        rotate_x -= 2;
-        break;
-        //  Клавиша "F1" - увеличить фигуру на 0.1
+      rotate_x -= 2;
+      break;
+      //  РљР»Р°РІРёС€Р° "F1" - СѓРІРµР»РёС‡РёС‚СЊ С„РёРіСѓСЂСѓ РЅР° 0.1
     case GLUT_KEY_F1:
-        if (k<2) k += 0.1;
-        break;
-        //  Клавиша "F2" - уменьшить фигуру на 0.1
+      if (k < 2) k += 0.1;
+      break;
+      //  РљР»Р°РІРёС€Р° "F2" - СѓРјРµРЅСЊС€РёС‚СЊ С„РёРіСѓСЂСѓ РЅР° 0.1
     case GLUT_KEY_F2:
-        if (k>0) k -= 0.1;
-        break;
-        //  Клавиша "F3" - увеличичить значения красного цвета на 0.01
+      if (k > 0) k -= 0.1;
+      break;
+      //  РљР»Р°РІРёС€Р° "F3" - СѓРІРµР»РёС‡РёС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ РєСЂР°СЃРЅРѕРіРѕ С†РІРµС‚Р° РЅР° 0.01
     case GLUT_KEY_F3:
-        r += 0.01;
-        break;
-        //  Клавиша "F4" - увеличичить значения зеленого цвета на 0.01
+      r += 0.01;
+      break;
+      //  РљР»Р°РІРёС€Р° "F4" - СѓРІРµР»РёС‡РёС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ Р·РµР»РµРЅРѕРіРѕ С†РІРµС‚Р° РЅР° 0.01
     case GLUT_KEY_F4:
-        g += 0.01;
-        break;
-        //  Клавиша "F5" - увеличичить значения синего цвета на 0.01
+      g += 0.01;
+      break;
+      //  РљР»Р°РІРёС€Р° "F5" - СѓРІРµР»РёС‡РёС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ СЃРёРЅРµРіРѕ С†РІРµС‚Р° РЅР° 0.01
     case GLUT_KEY_F5:
-        b += 0.01;
-        break;
-        //  Клавиша "F6" - уменьшить значения синего цвета на 0.01
+      b += 0.01;
+      break;
+      //  РљР»Р°РІРёС€Р° "F6" - СѓРјРµРЅСЊС€РёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ СЃРёРЅРµРіРѕ С†РІРµС‚Р° РЅР° 0.01
     case GLUT_KEY_F6:
-        r -= 0.01;
-        break;
-        //  Клавиша "F7" - уменьшить значения синего цвета на 0.01
+      r -= 0.01;
+      break;
+      //  РљР»Р°РІРёС€Р° "F7" - СѓРјРµРЅСЊС€РёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ СЃРёРЅРµРіРѕ С†РІРµС‚Р° РЅР° 0.01
     case GLUT_KEY_F7:
-        g -= 0.01;
-        break;
-        //  Клавиша "F8" - уменьшить значения синего цвета на 0.01
+      g -= 0.01;
+      break;
+      //  РљР»Р°РІРёС€Р° "F8" - СѓРјРµРЅСЊС€РёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ СЃРёРЅРµРіРѕ С†РІРµС‚Р° РЅР° 0.01
     case GLUT_KEY_F8:
-        b -= 0.01;
-        break;
-        //  Клавиша "F9" - вернуть цвета по умолчанию
+      b -= 0.01;
+      break;
+      //  РљР»Р°РІРёС€Р° "F9" - РІРµСЂРЅСѓС‚СЊ С†РІРµС‚Р° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
     case GLUT_KEY_F9:
-        r = 0;
-        g = 0;
-        b = 0;
-        break;
-        //  Клавиша "F10" - сбросить размеры объекта до состояния по умолчанию
+      r = 0;
+      g = 0;
+      b = 0;
+      break;
+      //  РљР»Р°РІРёС€Р° "F10" - СЃР±СЂРѕСЃРёС‚СЊ СЂР°Р·РјРµСЂС‹ РѕР±СЉРµРєС‚Р° РґРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
     case GLUT_KEY_F10:
-        k = 1.5;
-        break;
-        //  Клавиша "F11" - сбросить углы поворота объекта
+      k = 1.5;
+      break;
+      //  РљР»Р°РІРёС€Р° "F11" - СЃР±СЂРѕСЃРёС‚СЊ СѓРіР»С‹ РїРѕРІРѕСЂРѕС‚Р° РѕР±СЉРµРєС‚Р°
     case GLUT_KEY_F11:
-        rotate_x = 0;
-        rotate_y = 0;
-    }
-    
+      rotate_x = 0;
+      rotate_y = 0;
+  }
 
-    //  обновление активного окна
-    glutPostRedisplay();
-
+  //  РѕР±РЅРѕРІР»РµРЅРёРµ Р°РєС‚РёРІРЅРѕРіРѕ РѕРєРЅР°
+  glutPostRedisplay();
 }
 
 // ----------------------------------------------------------
-//  Вызов функции для работы с остальной клавиатурой
+//  Р’С‹Р·РѕРІ С„СѓРЅРєС†РёРё РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РѕСЃС‚Р°Р»СЊРЅРѕР№ РєР»Р°РІРёР°С‚СѓСЂРѕР№
 // ----------------------------------------------------------
 
 void keyboard_ascii(unsigned char key, int x, int y) {
-    switch (key) {
-        //  Клавиша "Tab" - сменить показываемый объект
+  switch (key) {
+      //  РљР»Р°РІРёС€Р° "Tab" - СЃРјРµРЅРёС‚СЊ РїРѕРєР°Р·С‹РІР°РµРјС‹Р№ РѕР±СЉРµРєС‚
     case 9:
-        figure++;
-        break;
-        //  Клавиша "Esc" - завершить работу программы
+      figure++;
+      break;
+      //  РљР»Р°РІРёС€Р° "Esc" - Р·Р°РІРµСЂС€РёС‚СЊ СЂР°Р±РѕС‚Сѓ РїСЂРѕРіСЂР°РјРјС‹
     case 27:
-        exit(0);
-        break;
-    }
-    
+      exit(0);
+      break;
+  }
 }
 
 // ----------------------------------------------------------
-//  Вызов функции для работы с мышью
+//  Р’С‹Р·РѕРІ С„СѓРЅРєС†РёРё РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РјС‹С€СЊСЋ
 // ----------------------------------------------------------
-void mouse(int button, int state, int x, int y)
-{
-
-    switch (button) {
-        //  Левая кнопка мыши - поворот по диагонали влево вверх на 5 градусов
+void mouse(int button, int state, int x, int y) {
+  switch (button) {
+      //  Р›РµРІР°СЏ РєРЅРѕРїРєР° РјС‹С€Рё - РїРѕРІРѕСЂРѕС‚ РїРѕ РґРёР°РіРѕРЅР°Р»Рё РІР»РµРІРѕ РІРІРµСЂС… РЅР° 5 РіСЂР°РґСѓСЃРѕРІ
     case GLUT_LEFT_BUTTON:
-        rotate_x -= 3;
-        rotate_y -= 3;
-        break;
-        //  Правая кнопка мыши - поворот по диагонали вправо вверх на 5 градусов
+      rotate_x -= 3;
+      rotate_y -= 3;
+      break;
+      //  РџСЂР°РІР°СЏ РєРЅРѕРїРєР° РјС‹С€Рё - РїРѕРІРѕСЂРѕС‚ РїРѕ РґРёР°РіРѕРЅР°Р»Рё РІРїСЂР°РІРѕ РІРІРµСЂС… РЅР° 5 РіСЂР°РґСѓСЃРѕРІ
     case GLUT_RIGHT_BUTTON:
-        rotate_x -= 3;
-        rotate_y += 3;
-        break;
-        // Средняя кнопка мыши - смена фона приложения
+      rotate_x -= 3;
+      rotate_y += 3;
+      break;
+      // РЎСЂРµРґРЅСЏСЏ РєРЅРѕРїРєР° РјС‹С€Рё - СЃРјРµРЅР° С„РѕРЅР° РїСЂРёР»РѕР¶РµРЅРёСЏ
     case GLUT_MIDDLE_BUTTON:
-        bg+=0.5;
-        break;
-    }
+      bg += 0.5;
+      break;
+  }
 
-    //  Обновление активного окна
-    glutPostRedisplay();
+  //  РћР±РЅРѕРІР»РµРЅРёРµ Р°РєС‚РёРІРЅРѕРіРѕ РѕРєРЅР°
+  glutPostRedisplay();
 }
 
 int main(int argc, char* argv[]) {
+  //  РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ GlUT
+  glutInit(&argc, argv);
 
-    //  Инициализация GlUT
-    glutInit(&argc, argv);
+  //  Р—Р°РґР°РЅРёРµ СЂР°Р·РјРµСЂР° РІС‹Р·С‹РІР°РµРјРѕРіРѕ РѕРєРЅР°
+  glutInitWindowSize(700, 700);
 
-    //  Задание размера вызываемого окна
-    glutInitWindowSize(700, 700);
+  //  РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Р±СѓС„РµСЂРѕРІ РѕР±РјРµРЅР° Рё РєРѕРѕСЂРґРёРЅР°С‚С‹ Z
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
-    //  Инициализация буферов обмена и координаты Z
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+  //  Р’С‹Р·РѕРІ РѕРєРЅР° СЃ РіСЂР°С„РёС‡РµСЃРєРёРј РёРЅС‚РµСЂС„РµР№СЃРѕРј
+  glutCreateWindow(
+      "Р Р°СЃС‡РµС‚РЅРѕ-РіСЂР°С„РёС‡РµСЃРєР°СЏ СЂР°Р±РѕС‚Р° РїРѕ РєРѕРјРїСЊСЋС‚РµСЂРЅРѕР№ РіСЂР°С„РёРєРµ. РђР‘-021");
 
-    //  Вызов окна с графическим интерфейсом
-    glutCreateWindow("Расчетно-графическая работа по компьютерной графике. АБ-021");
+  //  РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С„СѓРЅРєС†РёРё С‚РµСЃС‚Р°
+  glEnable(GL_DEPTH_TEST);
 
-    //  Инициализация функции теста
-    glEnable(GL_DEPTH_TEST);
+  //  Р’С‹Р·РѕРІ РґРёСЃРїР»РµСЏ Рё СѓРїСЂР°РІР»РµРЅРёСЏ РєР»Р°РІРёС€Р°РјРё РєР»Р°РІРёР°С‚СѓСЂС‹ Рё РјС‹С€Рё
+  glutDisplayFunc(display);
 
-    //  Вызов дисплея и управления клавишами клавиатуры и мыши
-    glutDisplayFunc(display);
+  glutSpecialFunc(specialKeys);
+  glutKeyboardFunc(keyboard_ascii);
+  glutMouseFunc(mouse);
 
-    glutSpecialFunc(specialKeys);
-    glutKeyboardFunc(keyboard_ascii);
-    glutMouseFunc(mouse);
+  //  Р—Р°С†РёРєР»РёРІР°РЅРёРµ РїРѕРєР°Р·Р° РєР°РґСЂРѕРІ
+  glutMainLoop();
 
-    //  Зацикливание показа кадров
-    glutMainLoop();
-
-    //  Выход из программы
-    return 0;
-
+  //  Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹
+  return 0;
 }
 #endif
-
-
